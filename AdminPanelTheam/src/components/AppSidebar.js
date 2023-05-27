@@ -3,11 +3,12 @@ import { useSelector, useDispatch } from 'react-redux'
 
 import { CSidebar, CSidebarBrand, CSidebarNav, CSidebarToggler } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-
+import {App}from 'src/components/header/App.css'
 import { AppSidebarNav } from './AppSidebarNav'
 
-import { logoNegative } from 'src/assets/brand/logo-negative'
-import { sygnet } from 'src/assets/brand/sygnet'
+import bubbleeIcon from 'src/assets/brand/bubblee_icon.png';
+import { ReactComponent as sygnet } from 'src/assets/brand/sygnet.svg'
+
 
 import SimpleBar from 'simplebar-react'
 import 'simplebar/dist/simplebar.min.css'
@@ -20,6 +21,10 @@ const AppSidebar = () => {
   const unfoldable = useSelector((state) => state.sidebarUnfoldable)
   const sidebarShow = useSelector((state) => state.sidebarShow)
 
+  React.useEffect(() => {
+    dispatch({ type: 'set', sidebarShow });
+  }, [dispatch, sidebarShow]);
+
   return (
     <CSidebar
       position="fixed"
@@ -29,10 +34,14 @@ const AppSidebar = () => {
         dispatch({ type: 'set', sidebarShow: visible })
       }}
     >
-      <CSidebarBrand className="d-none d-md-flex" to="/">
-        <CIcon className="sidebar-brand-full" icon={logoNegative} height={35} />
-        <CIcon className="sidebar-brand-narrow" icon={sygnet} height={35} />
-      </CSidebarBrand>
+      <CSidebarBrand className="d-none d-md-flex" to="/" style={{ backgroundImage: `url(${bubbleeIcon})` }}>
+  <div className="sidebar-brand-full">
+    <img src={bubbleeIcon} alt="Bubblee Icon" className="logo-image" />
+    
+  </div>
+  <div className="sidebar-brand-narrow" icon={sygnet} height={10} />
+</CSidebarBrand>
+
       <CSidebarNav>
         <SimpleBar>
           <AppSidebarNav items={navigation} />

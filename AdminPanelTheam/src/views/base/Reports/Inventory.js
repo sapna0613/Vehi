@@ -4,7 +4,7 @@ function Inventory()
 {
     return(
         <div className="Inventory">
-        <h1>Dispute_Reasons</h1>
+        <h1>Inventory Information</h1>
         </div>
     )
 }

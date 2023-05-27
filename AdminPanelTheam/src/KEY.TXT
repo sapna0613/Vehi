@@ -1,0 +1,242 @@
+cilCalculator,cilChartPie,
+  cilCursor,cilDrop,
+  cilNotes,cilPuzzle,
+  GiHumanPyramid,
+  cilChevronBottom,cilDialpad,
+  cilEuro,ccilInstitution,
+
+  // import{CNavGroup,CNavItem,CNavTitle}from'@coreui/react'
+  // import Globalsetting from './views/base/System_Setting/GlobalSetup'
+
+  {
+    component:CNavGroup,
+    name:'System Roles',
+    icon:<CIcon icon={cilSpeaker} customClassName="nav-icon" />,
+    items: [
+      {
+        component:CNavItem,
+        name:'System Roles',
+        to:'/base/System_Rolls/System_Roles',
+        icon:<CIcon icon={ManageAccountsIcon} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'Roles',
+        to:'/base/System_Rolls/Roles',
+        icon:<CIcon icon={cilRowing} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'Affiliated Partners',
+        to:'/base/System_Rolls/Affiliated_Partners',
+        icon:<CIcon icon={cilSnowflake} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'Operation Manager',
+        to:'/base/System_Rolls/Operation_Manager',
+        icon:<CIcon icon={cilFax} customClassName="nav-icon" />
+      },
+      {
+        component: CNavItem,
+        name:'Account Manager',
+        to:'/base/System_Rolls/Account_Manager',
+        icon:<CIcon icon={cilUser} customClassName="nav-icon" />,
+      },
+      {
+        component: CNavItem,
+        name:'Dispute Manager',
+        to:'/base/System_Rolls/Dispute_Manager',
+        icon:<CIcon icon={cilUserFemale} customClassName="nav-icon" />
+      },
+    ],
+  },
+  {
+    component:CNavGroup,
+    name:'E-wallet',
+    icon:<CIcon icon={cilWallet} customClassName="nav-icon" />,
+    items: [
+      {
+        component:CNavItem,
+        name:'E-wallet',
+        to:'/base/E-wallet_Management/E-wallet',
+        icon:<CIcon icon={cilWallet} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'Customer',
+        to:'/base/E-wallet_Management/Customer',
+        icon:<CIcon icon={cilUserPlus} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'Merchants', 
+        to:'/base/E-wallet_Management/Merchants',
+        icon:<CIcon icon={cilBuilding} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'Affiliated Partners',                         
+        to:'/base/E-wallet_Management/Affiliated_Partners',
+        icon:<CIcon icon={cilFork} customClassName="nav-icon" />
+      },
+    ],
+  },
+  {
+    component:CNavGroup,
+    name:'Order History',
+    icon:<CIcon icon={cilClipboard} customClassName="nav-icon" />,
+    items: [
+      {
+        component:CNavItem,
+        name:'Order History',
+        to:'/base/Order_History/Order_History',
+        icon:<CIcon icon={cilClipboard} customClassName="nav-icon" />
+      },
+    ],
+},
+{
+  component:CNavGroup,
+  name:'Payout',
+  icon: <CIcon icon={cilDollar} customClassName="nav-icon" />,
+  items: [
+    {
+      component: CNavItem,
+      name:'Payout',
+      to: '/base/Payout/Payout',
+      icon:<CIcon icon={cilDollar} customClassName="nav-icon" />
+    },
+  ],
+},
+{
+  component: CNavGroup,
+  name: 'Reports',
+  icon: <CIcon icon={cilStar} customClassName="nav-icon" />,
+  items: [
+    {
+            component: CNavItem,
+            name:'Reports',
+            to :'/base/Reports/Reports',
+            icon:<CIcon icon={cilStar} customClassName="nav-icon" />
+    },
+    {
+            component: CNavItem,
+            name:'Customers',
+             to :'/base/Reports/Customers',
+             icon:<CIcon icon={cilWc} customClassName="nav-icon" />
+   },  
+   {
+       component: CNavItem,
+         name:'Merchants',
+          to :'/base/Reports/Merchants',
+          icon:<CIcon icon={cilContact} customClassName="nav-icon" />
+    },     
+    {
+            component: CNavItem,
+            name:'Subscription Plans',
+            to :'/base/Reports/Subscription_Plans',
+            icon:<CIcon icon={cilCreditCard} customClassName="nav-icon" />
+          },
+          {
+            component: CNavItem,
+            name:'Inventory',
+            to :'/base/Reports/Inventory',
+            icon:<CIcon icon={cilListRich} customClassName="nav-icon" />
+          },
+          {
+            component: CNavItem,
+            name:'Orders',
+            to :'/base/Reports/Orders',
+            icon:<CIcon icon={cilList} customClassName="nav-icon" />
+          },
+          {
+            component: CNavItem,
+            name:'Affiliated Partner Commission',
+            to :'/base/Reports/Affiliated Partner Commission',
+            icon:<CIcon icon={cibBitcoin} customClassName="nav-icon" />
+          },
+          {
+            component: CNavItem,
+            name:'Loyalty Program',
+            to :'/base/Reports/Loyalty Program',
+            icon:<CIcon icon={cibGovUk} customClassName="nav-icon" />
+          },
+          {
+            component: CNavItem,
+            name:'Notifications',
+            to :'/base/Reports/Notifications',
+            icon:<CIcon icon={cilBellExclamation} customClassName="nav-icon" />
+          },
+          {
+            component:CNavItem,
+            name: 'Dispute reasons',
+            to :'/base/Reports/Dispute reasons',
+            icon:<CIcon icon={cilMoodVeryBad} customClassName="nav-icon" />
+          },
+          {
+            component: CNavItem,
+            name: 'Tickets',
+            to :'/base/Reports/Tickets',
+            icon:<CIcon icon={cilAudioDescription} customClassName="nav-icon" />
+          },
+        ],
+      },
+
+      ///////////////////////////////////////////////////////
+            {
+        component: CNavItem,
+        name: 'Carousel',
+        to: '/base/carousels',
+      },
+      {
+        component: CNavItem,
+        name: 'Collapse',
+        to: '/base/collapses',
+      },
+      {
+        component: CNavItem,
+        name: 'List group',
+        to: '/base/list-groups',
+      },
+      {
+        component: CNavItem,
+        name: 'Navs & Tabs',
+        to: '/base/navs',
+      },
+      {
+        component: CNavItem,
+        name: 'Pagination',
+        to: '/base/paginations',
+      },
+      {
+        component: CNavItem,
+        name: 'Placeholders',
+        to: '/base/placeholders',
+      },
+      {
+        component: CNavItem,
+        name: 'Popovers',
+        to: '/base/popovers',
+      },
+      {
+        component: CNavItem,
+        name: 'Progress',
+        to: '/base/progress',
+      },
+      {
+        component: CNavItem,
+        name: 'Spinners',
+        to: '/base/spinners',
+      },
+      {
+        component: CNavItem,
+        name: 'Tables',
+        to: '/base/tables',
+      },
+      {
+        component: CNavItem,
+        name: 'Tooltips',
+        to: '/base/tooltips',
+      },
+    ],
+  },

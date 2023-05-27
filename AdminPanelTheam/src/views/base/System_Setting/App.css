@@ -1,0 +1,19 @@
+.custom-table {
+    border: 1px solid #ccc;
+  }
+  
+  .custom-table th,
+  .custom-table td {
+    padding: 0.5rem;
+    text-align: center;
+  }
+  
+  .custom-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .custom-table th {
+    background-color: #ddd;
+    font-weight: bold;
+  }
+  
