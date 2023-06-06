@@ -19,12 +19,12 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => { 
   const navigate = useNavigate();
-  const [username, setUsername] = useState('');
+  const [phone, setphone] = useState('');
   const [password, setPassword] = useState('');
 
 
-  const handleUsernameChange = (event) => {
-    setUsername(event.target.value);
+  const handlephoneChange = (event) => {
+    setphone(event.target.value);
   };
 
   const handlePasswordChange = (event) => {
@@ -35,17 +35,18 @@ const Login = () => {
     event.preventDefault();
     // handle login authentication here with username and password
     const formData = new FormData(); // Create new FormData object to send data in request body
-    formData.append('username', username);
+    formData.append('Phone', phone);
     formData.append('password', password);
+    
 
     const dropdown = {
       // BusinessState: value,
-     username,password
+      phone,password
     } 
 
 
   
-      const res = await fetch('http://localhost:5000/Login', {
+      const res = await fetch('http://localhost:5000/login', {
         method: 'POST',
         body: formData,
        
@@ -78,10 +79,10 @@ const Login = () => {
                         <CIcon icon={cilUser} />
                       </CInputGroupText>
                       <CFormInput
-                        placeholder="Username"
-                        autoComplete="username"
-                        value={username}
-                        onChange={handleUsernameChange}
+                        placeholder="phone"
+                        autoComplete="phone"
+                        value={phone}
+                        onChange={handlephoneChange}
                       />
                     </CInputGroup>
                     <CInputGroup className="mb-4">

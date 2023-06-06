@@ -63,7 +63,7 @@ const PushNotificationConfig= React.lazy(() => import('./views/base/System_Setti
 const PaymentSetting= React.lazy(() => import('./views/base/System_Setting/PaymentSetting'))
 
 //******************************System Reference************************//
-
+const Register = React.lazy(()=> import('./views/base/SystemReference/Register'))
 const Customer = React.lazy(()=> import('./views/base/SystemReference/Customer'))
 const CreateCustomer = React.lazy(()=> import('./views/base/SystemReference/CreateCustomer'))
 const AffiliatedPartners = React.lazy(()=> import('./views/base/SystemReference/AffiliatedPartners'))
@@ -219,6 +219,7 @@ const routes = [
 
   // //**********************************/ System_Reference//**************************** */
   { path:'/base/SystemReference/Customer', name :'Customer', element: Customer },
+  { path:'/base/SystemReference/Register', name :'Register', element: Register },
   {path:'/base/SystemReference/Updatepartners/:id', name:'Update' ,element : Updatepartners},
   {path:'/base/SystemReference/UpdateSubsPlan/:id', name:'Update' ,element : UpdateSubsPlan},
   {path:'/base/SystemReference/UpdatePromoCode/:id', name:'Update' ,element : UpdatePromoCode},

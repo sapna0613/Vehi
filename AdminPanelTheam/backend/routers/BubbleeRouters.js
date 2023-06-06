@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose= require('mongoose');
 const aws = require("aws-sdk");
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 aws.config.update({
   accessKeyId: "AKIARD63KSO4FYHW7VVX",
@@ -1379,23 +1381,6 @@ router.delete('/CreatePromoCode/:id', async (req, res) => {
 
 //Post login
 
-const LoginSchema = require('../modal/Login')
-
-router.post('/Login',async(req,res)=>{
-try{
-  
-    const login = await LoginSchema.findOne(req.body);
-    if (!login){
-      return res.send({status:false})
-    }
-    res.send({status:true})
-    }
-    catch(err){
-      console.log(err.message)
-    }
-
-    
-})
 
 
 /////////////////////////////////////////
@@ -2623,25 +2608,132 @@ console.log(req.body)
   }
 });
 
-/////////payment setting
+/////////Register  user
 
-const  PaymentSettingSchema= require('../modal/PaymentSetting');
-router.post('/PaymentSetting', async (req, res) => {
+aws.config.update({
+  accessKeyId: "AKIARD63KSO4FYHW7VVX",
+  secretAccessKey: "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",
+  region: "ap-south-1",
+});
+
+let fileupload = async (file) => {
+  return new Promise(function (resolve, reject) {
+    let s3 = new aws.S3({ apiVersion: "2006-03-01" });
+    var uploadParams = {
+      Bucket: "bp-profilepicture-upload",
+      Key: "abc/" + file.originalname,
+      Body: file.buffer,
+    };
+    s3.upload(uploadParams, function (err, data) {
+      if (err) {
+        return reject({ error: err });
+      }
+      console.log("file uploaded successfully");
+      return resolve(data.Location);
+    });
+  });
+};
+
+const RegisterSchema = require('../modal/RegisteModal');
+
+const Register = async function (req, res) {
   try {
-    const {  } = req.body;
-console.log(req.body)
-   
-    const savedDropdwn = await PaymentSettingSchema.create(req.body);
-    console.log(savedDropdwn);
+    const data = req.body;
+    const files = req.files;
 
-    res.status(201).json(savedDropdwn);
-  } 
+    if (!files || files.length === 0) {
+      return res.status(400).send({
+        status: false,
+        message: "No file uploaded",
+      });
+    }
 
-  
-   catch (error) {
-    console.log(error.message)
-    res.status(400).json({ message: error.message });
+    const { Name, Email, Phone, Type, password, Status, joiningDate } = data;
+
+    if (
+      !(
+        files[0].mimetype == "image/png" ||
+        files[0].mimetype == "image/jpg" ||
+        files[0].mimetype == "image/jpeg"
+      )
+    ) {
+      return res.status(400).send({
+        status: false,
+        message: "Only .png, .jpg, and .jpeg format allowed!",
+      });
+    }
+
+    let uploadedFileURL = await fileupload(files[0]);
+
+    data.profilePic = uploadedFileURL;
+
+    // Check if userId is already present in the request data
+    if (!data.userId) {
+      // Generate a new userId if it's not present
+      const timestamp = Date.now();
+      data.userId = timestamp.toString().substr(-5);
+    }
+
+    // Create a new document using the RegisterSchema model
+    const registration = new RegisterSchema({
+      userId: data.userId,
+      Name,
+      Email,
+      Phone,
+      Type,
+      password,
+      Status,
+      joiningDate,
+    });
+
+    const savedRegistration = await registration.save();
+
+    return res.status(201).send({
+      status: true,
+      userId: savedRegistration.userId,
+    });
+
+  } catch (err) {
+    return res.status(500).send({ status: false, message: err.message });
+  }
+}
+
+router.post('/Register', Register);
+
+/////////////////////////Login user
+
+router.post('/login', async (req, res) => {
+  try {
+    const { Phone, password } = req.body;
+
+    if (!Phone || !password) {
+      return res.status(400).json({ status: false, message: 'Phone and password are required' });
+    }
+
+    const user = await RegisterSchema.findOne({ Phone });
+
+    if (!user) {
+      return res.status(404).json({ status: false, message: 'User not found' });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ status: false, message: 'Invalid credentials' });
+    }
+
+    return res.json({ status: true, message: 'User signed in successfully' });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ status: false, message: 'Internal server error' });
   }
 });
+
 module.exports = router;
+
+
+
+
+
+
 

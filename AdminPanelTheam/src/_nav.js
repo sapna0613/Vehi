@@ -75,6 +75,12 @@ const nav = [
         icon: <CIcon icon={cilGroup} customClassName="nav-icon" />
       },
       {
+        component:CNavItem,
+        name:'Register',
+        to:'/base/SystemReference/Register',
+        icon: <CIcon icon={cilGroup} customClassName="nav-icon" />
+      },
+      {
         component: CNavItem,
         name:'Affiliated Partners',
         to:'/base/SystemReference/AffiliatedPartners',
