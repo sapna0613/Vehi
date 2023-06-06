@@ -2700,6 +2700,43 @@ const Register = async function (req, res) {
 
 router.post('/Register', Register);
 
+
+//////////////////// Get register details
+
+router.get('/Register/:id', async (req, res) => {
+  try {
+    const id = mongoose.Types.ObjectId(req.params.id); 
+    const savedDropdwn = await RegisterSchema.findById(id);
+    console.log(savedDropdwn);
+
+    res.status(200).json(savedDropdwn);
+  } catch (error) {
+    console.log(error.message);
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+router.get('/Register', async (req, res) => {
+  try {
+       console.log("hello")
+  
+// console.log(newBusinessState)
+    const savedDropdwn = await RegisterSchema.find();
+    console.log(savedDropdwn);
+
+    res.status(201).json(savedDropdwn);
+  } 
+
+  
+   catch (error) {
+    console.log(error.message)
+    res.status(400).json({ message: error.message });
+  }
+});
+
+
+
 /////////////////////////Login user
 
 router.post('/login', async (req, res) => {
@@ -2728,6 +2765,115 @@ router.post('/login', async (req, res) => {
     return res.status(500).json({ status: false, message: 'Internal server error' });
   }
 });
+
+
+/////KYC post
+
+aws.config.update({
+  accessKeyId: "AKIARD63KSO4FYHW7VVX",
+  secretAccessKey: "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",
+  region: "ap-south-1",
+});
+
+let uploadFille = async (file) => {
+  return new Promise(function (resolve, reject) {
+    // This function will upload the file to AWS and return the link
+    let s3 = new aws.S3({ apiVersion: "2006-03-01" }); // We will be using the S3 service of AWS
+
+    var uploadParams = {
+      Bucket: "bp-profilepicture-upload",
+      Key: "abc/" + file.originalname,
+      Body: file.buffer,
+    };
+
+    s3.upload(uploadParams, function (err, data) {
+      if (err) {
+        return reject({ error: err });
+      }
+      console.log("File uploaded successfully");
+      return resolve(data.Location);
+    });
+  });
+};
+
+const KYCSchema = require('../modal/KYCModal');
+const KYC = async function (req, res) {
+  try {
+    const data = req.body;
+    const files = req.files;
+
+    if (!files || files.length === 0) {
+      return res.status(400).send({
+        status: false,
+        message: "No file uploaded",
+      });
+    }
+
+    const file = files[0];
+
+    if (
+      !(
+        file.mimetype === "image/png" ||
+        file.mimetype === "image/jpg" ||
+        file.mimetype === "image/jpeg"
+      )
+    ) {
+      return res.status(400).send({
+        status: false,
+        message: "Only .png, .jpg, and .jpeg formats are allowed!",
+      });
+    }
+
+    let uploadedFileURL = await uploadFille(file);
+
+    data.aadharFront = uploadedFileURL;
+    data.aadharBack = uploadedFileURL;
+
+    let KYC = await KYCSchema.create(data);
+    return res.status(201).send({
+      status: true,
+      message: "Success",
+      aadharFront: uploadedFileURL,
+      aadharBack: uploadedFileURL,
+      
+    });
+  } catch (err) {
+    return res.status(500).send({ status: false, message: err.message });
+  }
+};
+
+router.post('/KYC', KYC);
+
+
+
+//////////////////Generate Lead 
+
+const AddLeadSchema = require('../modal/AddLead');
+
+router.post('/AddLead', async (req, res) => {
+  try {
+    const {  } = req.body;
+console.log(req.body)
+    // const newBusinessState = new BusinessStateSchema({
+    //   BusinessState,
+    //   Country,
+    //   State,
+    //   Tax,
+    // });
+// console.log(newBusinessState)
+    const savedDropdwn = await AddLeadSchema.create(req.body);
+    console.log(savedDropdwn);
+
+    res.status(201).json(savedDropdwn);
+  } 
+
+  
+   catch (error) {
+    console.log(error.message)
+    res.status(400).json({ message: error.message });
+  }
+});
+
 
 module.exports = router;
 

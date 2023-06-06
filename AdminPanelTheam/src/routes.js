@@ -62,8 +62,11 @@ const MailConfig= React.lazy(() => import('./views/base/System_Setting/MailConfi
 const PushNotificationConfig= React.lazy(() => import('./views/base/System_Setting/PushNotificationConfig'))
 const PaymentSetting= React.lazy(() => import('./views/base/System_Setting/PaymentSetting'))
 
+
 //******************************System Reference************************//
 const Register = React.lazy(()=> import('./views/base/SystemReference/Register'))
+const AddLead = React.lazy(()=> import('./views/base/SystemReference/AddLead'))
+const KYC = React.lazy(()=> import('./views/base/SystemReference/KYC'))
 const Customer = React.lazy(()=> import('./views/base/SystemReference/Customer'))
 const CreateCustomer = React.lazy(()=> import('./views/base/SystemReference/CreateCustomer'))
 const AffiliatedPartners = React.lazy(()=> import('./views/base/SystemReference/AffiliatedPartners'))
@@ -219,6 +222,7 @@ const routes = [
 
   // //**********************************/ System_Reference//**************************** */
   { path:'/base/SystemReference/Customer', name :'Customer', element: Customer },
+  { path:'/base/SystemReference/AddLead', name :'Add Lead', element: AddLead },
   { path:'/base/SystemReference/Register', name :'Register', element: Register },
   {path:'/base/SystemReference/Updatepartners/:id', name:'Update' ,element : Updatepartners},
   {path:'/base/SystemReference/UpdateSubsPlan/:id', name:'Update' ,element : UpdateSubsPlan},
@@ -250,7 +254,10 @@ const routes = [
   { path:'/base/SystemReference/CreateSubscriptionCategory', name: 'Create Category', element:  CreateSubscriptionCategory },
   { path:'/base/SystemReference/Ticket', name: 'Ticket', element: Ticket },
   { path:'/base/SystemReference/CreateTicket', name: 'Create Ticket', element: CreateTicket},
+  { path:'/base/SystemReference/KYC', name: 'KYC', element: KYC},
 
+
+ 
   //******************************System_Roless*************************************/
   { path:'/base/System_Roles/CreateOperationManager', name: 'Account Manager', element:CreateOperationManager},
   { path:'/base/System_Roles/CreateDisputeManager', name: 'Account Manager', element:CreateDisputeManager}, 

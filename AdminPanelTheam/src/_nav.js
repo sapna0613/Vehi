@@ -62,6 +62,7 @@ const nav = [
       },
     ],
   },
+  
   /************************System Reference*****************/
   {
     component: CNavGroup,
@@ -72,6 +73,18 @@ const nav = [
         component:CNavItem,
         name:'Customer',
         to:'/base/SystemReference/Customer',
+        icon: <CIcon icon={cilGroup} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'AddLead',
+        to:'/base/SystemReference/AddLead',
+        icon: <CIcon icon={cilGroup} customClassName="nav-icon" />
+      },
+      {
+        component:CNavItem,
+        name:'KYC',
+        to:'/base/SystemReference/KYC',
         icon: <CIcon icon={cilGroup} customClassName="nav-icon" />
       },
       {
